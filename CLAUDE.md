@@ -8,6 +8,8 @@ Plan: `AERO-01-aerodynamics-from-scratch-PLAN.md` (tick the phase checkboxes as 
 - `uv run pytest` — tests
 - `uv run ruff check . && uv run ruff format --check .` — lint/format (CI runs both)
 - `uv run python validation/<script>.py` — regenerate validation figures into `docs/figures/`
+- `uv run python notebooks/build_notebooks.py` — regenerate and execute the notebooks (edit cell
+  sources there, never the .ipynb JSON)
 
 ## Layout
 - `src/aero/` — single package; subpackages mirror the plan: `geometry`, `thin_airfoil`,

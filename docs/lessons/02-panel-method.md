@@ -160,7 +160,11 @@ $C_p = 1 - 4\sin^2\theta$ exactly.
 
 ![Cylinder test](../figures/lessons/l2_cylinder.png)
 
-Eight panels are already on the curve; 128 panels agree to within 0.002.
+Eight panels are already on the curve. In fact the control-point values are exact to round-off
+for any $N$: on a regular polygon, constant source panels reproduce the cylinder solution at the
+midpoints. So the cylinder catches sign and assembly bugs, but it **cannot measure
+discretisation error** ([Lesson 6](06-verification-and-validation.md), exercise 1). For that we
+need a harder exact case.
 
 **The real test** needs a lifting airfoil with a known exact answer. The **Joukowski map**
 $z = \zeta + b^2/\zeta$ turns a circle (whose flow we know) into a cambered, cusped airfoil

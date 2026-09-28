@@ -33,8 +33,9 @@ just below it differ by
 u_{upper} - u_{lower} = \gamma(x).
 ```
 
-So the idea is simple: *replace the airfoil by a vortex sheet and choose $\gamma(x)$ so that the
-flow behaves like flow around the airfoil*. Two assumptions make the problem tractable:
+So the idea is simple: **replace the airfoil by a vortex sheet**, and choose its strength
+$\gamma(x)$ so that the flow behaves like flow around the airfoil. Two assumptions make the
+problem tractable:
 
 - **Thin:** thickness is ignored; only the mean camber line $z(x)$ matters.
 - **Small angles:** $\alpha$ and the camber slope $dz/dx$ are small, so the sheet can sit on the

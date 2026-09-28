@@ -122,8 +122,8 @@ for n in (50, 100, 200, 400, 800):
         ),
         (
             "md",
-            "First-order convergence: the cusped trailing edge is the hardest case for "
-            "constant-strength panels.",
+            "The error falls by less than half per doubling (observed order about 0.7–0.8): the "
+            "cusped trailing edge is the hardest case for constant-strength panels.",
         ),
     ],
     "03_boundary_layer.ipynb": [
@@ -248,6 +248,23 @@ for sw, s in zip(sweeps, sweep_study(8, 0.4, sweeps * DEG), strict=True):
 }
 
 
+def _merge_streams(outputs):
+    """Join consecutive stdout/stderr chunks; how the kernel splits them depends on timing."""
+    merged = []
+    for out in outputs:
+        prev = merged[-1] if merged else None
+        if (
+            prev is not None
+            and out.get("output_type") == "stream"
+            and prev.get("output_type") == "stream"
+            and prev.get("name") == out.get("name")
+        ):
+            prev["text"] += out["text"]
+        else:
+            merged.append(out)
+    return merged
+
+
 def build(name: str, cells: list[tuple[str, str]]) -> Path:
     nb = nbformat.v4.new_notebook()
     nb.metadata["kernelspec"] = {
@@ -259,9 +276,17 @@ def build(name: str, cells: list[tuple[str, str]]) -> Path:
         nbformat.v4.new_markdown_cell(src) if kind == "md" else nbformat.v4.new_code_cell(src)
         for kind, src in cells
     ]
+    for i, cell in enumerate(nb.cells):
+        cell.id = f"cell-{i:02d}"  # stable ids keep rebuilds diff-free
     NotebookClient(
-        nb, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(HERE)}}
+        nb,
+        timeout=600,
+        kernel_name="python3",
+        record_timing=False,
+        resources={"metadata": {"path": str(HERE)}},
     ).execute()
+    for cell in nb.cells:
+        cell.get("outputs", [])[:] = _merge_streams(cell.get("outputs", []))
     path = HERE / name
     nbformat.write(nb, path)
     return path

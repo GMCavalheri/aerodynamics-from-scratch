@@ -7,7 +7,7 @@ license = { text = "MIT" }
 authors = [{ name = "Gabriel Milanez Cavalheri", email = "gmcavalheri@gmail.com" }]
 requires-python = ">=3.11"
 dependencies = [
-    "numpy>=1.26",
+    "numpy>=2.0",
     "scipy>=1.11",
     "matplotlib>=3.8",
 ]

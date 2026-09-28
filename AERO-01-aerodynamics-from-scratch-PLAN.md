@@ -51,7 +51,7 @@ aerodynamics-from-scratch/
 - [x] **Phase 2 — 2D panel method**: implement source/vortex panel method, validate Cl and Cp distribution against published NACA airfoil data (e.g., NACA 0012, NACA 2412).
 - [x] **Phase 3 — Boundary layer / viscous drag**: implement Thwaites' method, estimate Cd, compare against XFOIL reference values.
 - [x] **Phase 4 — 3D Vortex Lattice Method**: implement horseshoe vortex discretization, solve for circulation, validate against Prandtl's lifting-line results for elliptical wings.
-- [ ] **Phase 5 — Planform trade studies**: compare taper ratio, aspect ratio, and sweep effects on induced drag and spanwise loading.
+- [x] **Phase 5 — Planform trade studies**: compare taper ratio, aspect ratio, and sweep effects on induced drag and spanwise loading.
 - [ ] **Phase 6 — Documentation and publishing**: write theory notes per module, publish repository with visualizations (pressure distributions, streamlines, loading diagrams).
 
 ## Validation Strategy

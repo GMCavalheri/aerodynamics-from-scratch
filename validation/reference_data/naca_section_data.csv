@@ -14,3 +14,4 @@ NACA 0012,cl_alpha_per_deg,0.108,0.103,0.112,6e6,[AvD] lift-curve slope
 NACA 2412,alpha_L0_deg,-2.1,-2.3,-1.9,6e6,[And] Example 4.6 quoting [AvD]
 NACA 2412,cm_c4,-0.045,-0.05,-0.04,6e6,[And] Example 4.7 quoting [AvD]
 NACA 2412,cl_alpha_per_deg,0.105,0.100,0.110,6e6,[AvD] lift-curve slope
+NACA 0012,cd_min,0.0058,0.0052,0.0065,6e6,[AvD] minimum section drag (approximate reading of the smooth-model drag polar)

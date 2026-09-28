@@ -10,7 +10,7 @@
 
 ## Learning objectives
 
-1. Explain Prandtl's boundary-layer idea and define $\delta^*$, $\theta$ and $H$.
+1. Explain Prandtl's boundary-layer idea and define $\delta^{\ast}$, $\theta$ and $H$.
 2. Derive the von Kármán momentum-integral equation and read the role of the pressure gradient.
 3. Derive Thwaites' closed-form laminar solution and use it to predict laminar separation.
 4. Predict transition with Michel's criterion and continue with Head's turbulent method.
@@ -24,9 +24,9 @@ At the wall the air must stick: **no-slip**, $u = 0$. Away from the wall, at hig
 number, the flow behaves inviscidly. Prandtl's insight was that the transition between the two
 happens in a **thin layer** whose thickness scales like
 
-$$
+```math
 \frac{\delta}{x} \sim \frac{1}{\sqrt{Re_x}} .
-$$
+```
 
 At $Re = 3\times10^6$ that is a fraction of a percent of the chord. Two consequences shape the
 whole method:
@@ -41,19 +41,19 @@ With $u(y)$ the velocity profile and $U_e$ the edge velocity:
 
 | Quantity | Definition | Meaning |
 |---|---|---|
-| Displacement thickness | $\delta^* = \int_0^\infty\left(1 - \frac{u}{U_e}\right)dy$ | how far the outer flow is pushed away |
+| Displacement thickness | $\delta^{\ast} = \int_0^\infty\left(1 - \frac{u}{U_e}\right)dy$ | how far the outer flow is pushed away |
 | Momentum thickness | $\theta = \int_0^\infty\frac{u}{U_e}\left(1 - \frac{u}{U_e}\right)dy$ | momentum lost to friction, **drag** |
-| Shape factor | $H = \delta^*/\theta$ | profile "fullness": 2.59 laminar flat plate, ~1.4 turbulent, > 3.5 near laminar separation |
+| Shape factor | $H = \delta^{\ast}/\theta$ | profile "fullness": 2.59 laminar flat plate, ~1.4 turbulent, > 3.5 near laminar separation |
 
 ## 3. The momentum-integral equation
 
 Integrating the boundary-layer momentum equation across the layer (von Kármán, 1921) gives one
 ordinary differential equation along the surface coordinate $s$:
 
-$$
+```math
 \boxed{\;\frac{d\theta}{ds} + (2 + H)\,\frac{\theta}{U_e}\frac{dU_e}{ds} = \frac{c_f}{2}\;}
 \qquad c_f = \frac{\tau_w}{\tfrac12\rho U_e^2}.
-$$
+```
 
 Read it term by term:
 
@@ -77,50 +77,50 @@ One equation, three unknowns ($\theta$, $H$, $c_f$). Every integral method is a 
 
 Define the **pressure-gradient parameter** and a shear parameter
 
-$$
+```math
 \lambda = \frac{\theta^2}{\nu}\frac{dU_e}{ds},
 \qquad
 \ell = \frac{\tau_w\,\theta}{\mu U_e}.
-$$
+```
 
 Multiplying the momentum integral by $U_e\theta/\nu$ gives
 
-$$
+```math
 \frac{U_e}{\nu}\frac{d\theta^2}{ds} = 2\left[\ell - (2 + H)\lambda\right] \equiv F(\lambda).
-$$
+```
 
 Thwaites looked at every exact laminar solution he could find and noticed that the right-hand
 side is **almost a straight line**: $F(\lambda) \approx 0.45 - 6\lambda$. With that one
 approximation,
 
-$$
+```math
 \frac{U_e}{\nu}\frac{d\theta^2}{ds} + \frac{6\theta^2}{\nu}\frac{dU_e}{ds} = 0.45
 \;\;\Longrightarrow\;\;
 \frac{d}{ds}\left(U_e^6\theta^2\right) = 0.45\,\nu\,U_e^5,
-$$
+```
 
 which integrates in closed form:
 
-$$
+```math
 \boxed{\;\theta^2(s) = \frac{0.45\,\nu}{U_e^6(s)}\int_0^s U_e^5\,ds\;}
-$$
+```
 
 Laminar boundary layers reduce to **one integral**. $H$ and $\ell$ then come from correlations in
 $\lambda$, and laminar separation is predicted at $\lambda = -0.09$:
 
 ![Thwaites correlations](../figures/lessons/l3_thwaites_correlations.png)
 
-**Check on the flat plate** ($U_e$ = const): $\theta = \sqrt{0.45\,\nu x/U_e} = 0.671\,x/\sqrt{Re_x}$,
-against Blasius' exact $0.664\,x/\sqrt{Re_x}$, about 1 % off.
+**Check on the flat plate** ($U_e$ = const): $\theta = \sqrt{0.45\ \nu x/U_e} = 0.671\ x/\sqrt{Re_x}$,
+against Blasius' exact $0.664\ x/\sqrt{Re_x}$, about 1 % off.
 
 **At the stagnation point**, $U_e \approx Ks$ and the formula gives the finite Hiemenz value
-$\theta^2 = 0.075\,\nu/K$.
+$\theta^2 = 0.075\ \nu/K$.
 
 > **Numerical trap.** Near the stagnation point the integrand is $U_e^5 \propto s^5$. On the first
 > interval the trapezoidal rule gives $K^5h^6/2$ while the exact integral is $K^5h^6/6$: **three
 > times too large**, which spoils $\theta$ right where both boundary layers start. The code
 > integrates $U_e^5$ exactly for piecewise-linear $U_e$,
-> $\int_{s_1}^{s_2} U_e^5\,ds = \frac{h}{6}\sum_{k=0}^{5}u_1^k u_2^{5-k}$, and the Hiemenz test
+> $\int_{s_1}^{s_2} U_e^5\ ds = \frac{h}{6}\sum_{k=0}^{5}u_1^k u_2^{5-k}$, and the Hiemenz test
 > checks it.
 
 ## 5. Transition: Michel's criterion
@@ -130,9 +130,9 @@ becomes turbulent. Predicting where is hard. XFOIL tracks wave amplification wit
 method. The simplest useful rule is **Michel's criterion** (1951): transition occurs where the
 momentum-thickness Reynolds number reaches a critical curve
 
-$$
+```math
 Re_{\theta,tr} = 1.174\left(1 + \frac{22400}{Re_x}\right)Re_x^{0.46}.
-$$
+```
 
 ![Michel transition](../figures/lessons/l3_transition.png)
 
@@ -146,17 +146,17 @@ Turbulent layers are fuller ($H \approx 1.3$–$1.6$), rub harder on the wall an
 better. Head's method (1958) closes the momentum integral with an **entrainment** equation: a
 turbulent layer grows by swallowing outer fluid, at a rate that depends on its shape.
 
-$$
+```math
 \frac{d}{ds}\left(U_e\,\theta H_1\right) = U_e\,F(H_1),
 \qquad F = 0.0306\,(H_1 - 3)^{-0.6169},
-$$
+```
 
-with the mass-flow shape factor $H_1 = (\delta - \delta^*)/\theta$ related to $H$ by an empirical
+with the mass-flow shape factor $H_1 = (\delta - \delta^{\ast})/\theta$ related to $H$ by an empirical
 fit. Skin friction comes from the **Ludwieg–Tillmann** law,
 
-$$
+```math
 c_f = 0.246\times10^{-0.678H}\,Re_\theta^{-0.268}.
-$$
+```
 
 Two coupled ODEs ($\theta$ and $U_e\theta H_1$) are integrated with SciPy's `solve_ivp`, starting
 from the laminar $\theta$ at transition with $H = 1.4$. Turbulent separation is flagged at
@@ -174,10 +174,10 @@ Drag equals the momentum deficit in the **far wake**, $c_d = 2\theta_\infty/c$. 
 (1937) integrated the momentum equation along the wake, where there is no wall friction, and
 obtained a formula that only needs the trailing-edge state:
 
-$$
+```math
 \boxed{\;c_d = 2\,\theta_{TE}\left(\frac{U_{e,TE}}{V_\infty}\right)^{(H_{TE} + 5)/2}\;}
 \qquad\text{(per surface, then summed).}
-$$
+```
 
 It includes **both** skin friction and pressure (form) drag: the pressure part shows up as the
 extra $\theta$ growth caused by the adverse gradient.
@@ -201,9 +201,9 @@ r.cd, r.cd_friction  # 0.00733, 0.00647
 
 By hand, per surface:
 
-$$
+```math
 c_d = 2 \times 0.00257 \times 0.902^{(1.59 + 5)/2} = 2 \times 0.00257 \times 0.712 = 0.00366,
-$$
+```
 
 times two surfaces gives $c_d = 0.0073$, of which about 88 % is skin friction.
 
@@ -232,7 +232,7 @@ falls with Reynolds number and rises with incidence.
 
 ## 10. Exercises
 
-1. Derive Thwaites' flat-plate result $\theta = 0.671\,x/\sqrt{Re_x}$ and $c_f = 0.656/\sqrt{Re_x}$.
+1. Derive Thwaites' flat-plate result $\theta = 0.671\ x/\sqrt{Re_x}$ and $c_f = 0.656/\sqrt{Re_x}$.
 2. Show that for $U_e = Ks$ Thwaites' formula gives a constant $\theta$. Why does this make sense
    physically?
 3. Howarth's retarded flow $U_e = 1 - x$: estimate the separation point with Thwaites by hand
@@ -243,9 +243,9 @@ falls with Reynolds number and rises with incidence.
 <details>
 <summary>Answers</summary>
 
-1. $\theta^2 = 0.45\,\nu x/U_e$, so $\theta\sqrt{Re_x}/x = \sqrt{0.45} = 0.671$. With $\lambda = 0$,
+1. $\theta^2 = 0.45\ \nu x/U_e$, so $\theta\sqrt{Re_x}/x = \sqrt{0.45} = 0.671$. With $\lambda = 0$,
    $\ell = 0.22$ and $c_f = 2\ell/Re_\theta = 0.44/(0.671\sqrt{Re_x}) = 0.656/\sqrt{Re_x}$.
-2. $\theta^2 = \frac{0.45\nu}{K^6s^6}\cdot\frac{K^5s^6}{6} = \frac{0.075\,\nu}{K}$. Acceleration exactly
+2. $\theta^2 = \frac{0.45\nu}{K^6s^6}\cdot\frac{K^5s^6}{6} = \frac{0.075\ \nu}{K}$. Acceleration exactly
    balances viscous growth: the Hiemenz layer has constant thickness.
 3. $\theta^2 = \frac{0.45\nu}{(1-x)^6}\cdot\frac{1 - (1-x)^6}{6}$ and $\lambda = -\theta^2/\nu$.
    Setting $\lambda = -0.09$ gives $(1-x)^{-6} = 2.2$, so $x \approx 0.123$ (code: 0.1232; exact 0.1199).

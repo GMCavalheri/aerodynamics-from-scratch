@@ -8,11 +8,11 @@ Notebooks: [`04_vortex_lattice.ipynb`](../notebooks/04_vortex_lattice.ipynb),
 
 A straight vortex filament of circulation $\Gamma$ from $A$ to $B$ induces at $P$
 
-$$
+```math
 \mathbf V = \frac{\Gamma}{4\pi}\,\frac{\mathbf r_1\times\mathbf r_2}{|\mathbf r_1\times\mathbf r_2|^2}\,
 \mathbf r_0\cdot\left(\frac{\mathbf r_1}{r_1} - \frac{\mathbf r_2}{r_2}\right),
 \qquad \mathbf r_1 = P - A,\ \mathbf r_2 = P - B,\ \mathbf r_0 = B - A,
-$$
+```
 
 and a semi-infinite filament starting at $A$ along $\hat{\mathbf d}$ induces
 $\frac{\Gamma}{4\pi}\frac{\hat{\mathbf d}\times\mathbf r}{|\hat{\mathbf d}\times\mathbf r|^2}(1 + \hat{\mathbf d}\cdot\hat{\mathbf r})$.
@@ -46,13 +46,13 @@ $\left(\mathbf V_\infty + \sum_j \Gamma_j \mathbf V_{ij}\right)\cdot\hat{\mathbf
 dense linear system for the $\Gamma_j$.
 
 - **Lift and moment:** Kutta–Joukowski on each bound segment,
-  $\mathbf F_j = \rho\,\Gamma_j\,\mathbf V_\infty\times\mathbf l_j$.
+  $\mathbf F_j = \rho\ \Gamma_j\ \mathbf V_\infty\times\mathbf l_j$.
 - **Induced drag:** in the Trefftz plane far downstream the wake is a row of 2D point vortices
   of strength $\Delta\Gamma_k$ at the strip edges;
-  $D_i = -\tfrac{\rho}{2}\sum_j\Gamma_j\,(\mathbf w_j\cdot\hat{\mathbf n}_j)\,\Delta s_j$.
+  $D_i = -\tfrac{\rho}{2}\sum_j\Gamma_j\ (\mathbf w_j\cdot\hat{\mathbf n}_j)\ \Delta s_j$.
   This far-field evaluation is much less sensitive to the lattice than integrating near-field
   forces.
-- **Span efficiency:** $e = C_L^2/(\pi AR\,C_{D_i})$.
+- **Span efficiency:** $e = C_L^2/(\pi AR\ C_{D_i})$.
 
 ## Lifting-line reference
 

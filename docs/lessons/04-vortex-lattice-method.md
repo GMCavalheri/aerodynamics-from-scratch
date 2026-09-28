@@ -27,20 +27,20 @@ in the fluid: it must close on itself or extend to infinity. So the bound circul
 the corner at the tips and trails downstream**.
 
 More generally, wherever the spanwise circulation $\Gamma(y)$ changes, a trailing vortex of
-strength $-d\Gamma/dy\,dy$ is shed. The trailing vortex sheet induces a downward velocity
+strength $-d\Gamma/dy\ dy$ is shed. The trailing vortex sheet induces a downward velocity
 **$w$ (downwash)** at the wing, which tilts the local flow by the **induced angle**
 
-$$
+```math
 \alpha_i(y) = -\frac{w(y)}{V_\infty}.
-$$
+```
 
 Each section therefore sees a smaller effective angle $\alpha - \alpha_i$, so a finite wing lifts
 less than its airfoil. The local lift vector is also tilted back by $\alpha_i$. Its streamwise
 component is the **induced drag**:
 
-$$
+```math
 D_i = \int_{-b/2}^{b/2}\rho V_\infty\Gamma(y)\,\alpha_i(y)\,dy .
-$$
+```
 
 This is the price of producing lift with a finite span. In cruise it is roughly a third to 40 %
 of an airliner's drag, and in the climb after take-off it dominates.
@@ -50,18 +50,20 @@ of an airliner's drag, and in the climb after take-off it dominates.
 Replace the wing by a single bound vortex $\Gamma(y)$ on the quarter-chord line plus its
 trailing sheet. The downwash of the sheet at the line is
 
-$$
+```math
 w(y_0) = -\frac{1}{4\pi}\int_{-b/2}^{b/2}\frac{d\Gamma/dy}{y_0 - y}\,dy .
-$$
+```
 
 Requiring each section to behave like a 2D airfoil at its effective angle gives Prandtl's
 **monoplane equation**. Its most famous solution:
 
 > **Elliptic loading** $\Gamma = \Gamma_0\sqrt{1 - (2y/b)^2}$ produces a **constant downwash**
 > $w = -\Gamma_0/(2b)$, and
-> $$C_{D_i} = \frac{C_L^2}{\pi AR}, \qquad C_{L\alpha} = \frac{2\pi}{1 + 2/AR}.$$
+> ```math
+> C_{D_i} = \frac{C_L^2}{\pi AR}, \qquad C_{L\alpha} = \frac{2\pi}{1 + 2/AR}.
+> ```
 
-For any other loading, $C_{D_i} = C_L^2/(\pi AR\,e)$ with span efficiency $e \le 1$, equal to 1
+For any other loading, $C_{D_i} = C_L^2/(\pi AR\ e)$ with span efficiency $e \le 1$, equal to 1
 only for elliptic loading (Munk's theorem). Lesson 5 is about how close real planforms get.
 
 The repository solves the monoplane equation with Glauert's Fourier method
@@ -73,11 +75,11 @@ sweep, and near the tips. We need a **lifting surface**.
 
 A straight vortex segment from $A$ to $B$ with circulation $\Gamma$ induces at point $P$
 
-$$
+```math
 \mathbf V = \frac{\Gamma}{4\pi}\,\frac{\mathbf r_1\times\mathbf r_2}{|\mathbf r_1\times\mathbf r_2|^2}\;
 \mathbf r_0\cdot\left(\frac{\mathbf r_1}{r_1} - \frac{\mathbf r_2}{r_2}\right),
 \qquad \mathbf r_1 = P - A,\; \mathbf r_2 = P - B,\; \mathbf r_0 = B - A .
-$$
+```
 
 A **horseshoe vortex** is three straight filaments: in from $+\infty$ to $A$, the bound segment
 $A \to B$, and out from $B$ to $+\infty$. It satisfies Helmholtz automatically and is the
@@ -96,15 +98,15 @@ Where on each panel should the bound vortex go, and where should we enforce tang
 2D flat plate with **one** vortex $\Gamma$ at the quarter chord and **one** control point at the
 three-quarter chord. The vortex induces at the control point, a distance $c/2$ away,
 
-$$
+```math
 w = \frac{\Gamma}{2\pi(c/2)} = \frac{\Gamma}{\pi c}.
-$$
+```
 
 Tangency requires $w = V_\infty\alpha$, so $\Gamma = \pi c V_\infty\alpha$ and
 
-$$
+```math
 c_l = \frac{2\Gamma}{V_\infty c} = 2\pi\alpha .
-$$
+```
 
 That is **exactly** thin-airfoil theory, with a single element. Every panel of the lattice uses
 the same rule: bound vortex at its quarter chord, control point at its three-quarter chord.
@@ -115,10 +117,12 @@ the same rule: bound vortex at its quarter chord, control point at its three-qua
    dihedral). See the lattice figure below.
 2. Put a **horseshoe** on each panel and a **control point** at 3/4 of its chord.
 3. **Tangency** at every control point $i$:
-   $$\sum_j \Gamma_j\,(\mathbf V_{ij}\cdot\hat{\mathbf n}_i) = -\mathbf V_\infty\cdot\hat{\mathbf n}_i ,$$
+   ```math
+   \sum_j \Gamma_j\,(\mathbf V_{ij}\cdot\hat{\mathbf n}_i) = -\mathbf V_\infty\cdot\hat{\mathbf n}_i ,
+   ```
    where $\mathbf V_{ij}$ is the velocity at $i$ from a unit horseshoe $j$. This is a dense linear
    system, the **aerodynamic influence coefficient (AIC)** matrix.
-4. **Forces** from Kutta–Joukowski on every bound segment, $\mathbf F_j = \rho\,\Gamma_j\,\mathbf V_\infty\times\mathbf l_j$.
+4. **Forces** from Kutta–Joukowski on every bound segment, $\mathbf F_j = \rho\ \Gamma_j\ \mathbf V_\infty\times\mathbf l_j$.
 
 ![Lattice](../figures/vlm_lattice.png)
 
@@ -137,9 +141,9 @@ becomes 2D. The strength shed at spanwise node $k$ is the jump in strip circulat
 $\Delta\Gamma_k = \Gamma_{k-1} - \Gamma_k$. The induced drag is the kinetic energy left in that
 cross-flow:
 
-$$
+```math
 D_i = -\frac{\rho}{2}\sum_j \Gamma_j\,(\mathbf w_j\cdot\hat{\mathbf n}_j)\,\Delta s_j ,
-$$
+```
 
 with $\mathbf w_j$ the velocity of the 2D point-vortex row at strip $j$. (The Trefftz downwash is
 twice the downwash at the wing, which is where the $\tfrac12$ comes from.)

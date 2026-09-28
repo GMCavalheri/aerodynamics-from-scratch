@@ -61,7 +61,7 @@ hardest case for constant-strength panels:
 | NACA 2412 | $c_{m,c/4}$ | −0.0531 | −0.0604 | −0.045 |
 
 The panel method includes thickness, so its lift slope is ~10 % above $2\pi$ — close to the
-classical $2\pi(1 + 0.77\,t/c)$. Real sections fall *below* $2\pi$ because the boundary layer
+classical $2\pi(1 + 0.77\ t/c)$. Real sections fall *below* $2\pi$ because the boundary layer
 thickens towards the trailing edge on the suction side and effectively de-cambers the section;
 the same effect reduces $|c_m|$. The inviscid over-prediction of 12–15 % in lift slope and
 0.015 in $c_m$ is therefore the expected gap, and the tests assert its sign and bound.

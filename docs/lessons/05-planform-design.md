@@ -21,13 +21,13 @@
 
 ## 1. The design equation
 
-From Lesson 4, $C_{D_i} = C_L^2/(\pi AR\,e)$. Write it in dimensional form with $L = qSC_L$ and
+From Lesson 4, $C_{D_i} = C_L^2/(\pi AR\ e)$. Write it in dimensional form with $L = qSC_L$ and
 $AR = b^2/S$:
 
-$$
+```math
 \boxed{\;D_i = \frac{L^2}{q\,\pi\,b^2\,e}\;}
 \qquad q = \tfrac12\rho V_\infty^2 .
-$$
+```
 
 Read it carefully:
 
@@ -45,7 +45,7 @@ Four planforms of the same aspect ratio (8), analysed with the VLM:
 
 ![Planform loading](../figures/planform_loading.png)
 
-**Left: span loading $c\,c_l$.** This is what the wake sees and what sets induced drag. The
+**Left: span loading $c\ c_l$.** This is what the wake sees and what sets induced drag. The
 elliptic wing is elliptic ($e = 0.999$). The rectangular wing carries too much load near the
 tips ($e = 0.972$). The pointed wing ($\lambda = 0$) piles the load inboard but ends with a
 steep drop; its $e$ of 0.879 is the worst.
@@ -147,9 +147,9 @@ Every row is an application of the equations and figures in this lesson.
 Two wings carry the same lift at the same speed. Wing A is rectangular, AR 8. Wing B is a
 perfect ellipse with 5 % **less span**. Which has less induced drag?
 
-$$
+```math
 \frac{D_{i,B}}{D_{i,A}} = \frac{b_A^2\,e_A}{b_B^2\,e_B} = \frac{0.972}{0.95^2 \times 1.000} = 1.077 .
-$$
+```
 
 The "perfect" elliptic wing has **7.7 % more** induced drag. Five percent of span outweighs the
 whole planform effect.

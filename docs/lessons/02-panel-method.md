@@ -24,9 +24,9 @@
 For incompressible, inviscid, irrotational flow the velocity is the gradient of a potential,
 $\mathbf V = \nabla\phi$, and mass conservation becomes **Laplace's equation**
 
-$$
+```math
 \nabla^2\phi = 0 .
-$$
+```
 
 Laplace's equation is **linear**, so any sum of solutions is a solution. The whole panel method
 rests on this: build the flow around a body by adding up simple flows whose strengths we choose.
@@ -36,8 +36,8 @@ The building blocks (2D, counter-clockwise circulation positive):
 | Element | Potential | Velocity |
 |---|---|---|
 | Uniform stream | $V_\infty(x\cos\alpha + y\sin\alpha)$ | $V_\infty(\cos\alpha, \sin\alpha)$ |
-| Source $\sigma$ | $\frac{\sigma}{2\pi}\ln r$ | $\frac{\sigma}{2\pi r}\,\hat{\mathbf e}_r$ |
-| Vortex $\Gamma$ | $\frac{\Gamma}{2\pi}\theta$ | $\frac{\Gamma}{2\pi r}\,\hat{\mathbf e}_\theta$ |
+| Source $\sigma$ | $\frac{\sigma}{2\pi}\ln r$ | $\frac{\sigma}{2\pi r}\ \hat{\mathbf e}_r$ |
+| Vortex $\Gamma$ | $\frac{\Gamma}{2\pi}\theta$ | $\frac{\Gamma}{2\pi r}\ \hat{\mathbf e}_\theta$ |
 | Doublet $\mu$ | $\frac{\mu}{2\pi}\frac{\cos\theta}{r}$ | source–sink pair in the limit |
 
 A uniform stream plus a doublet of strength $\mu = 2\pi V_\infty R^2$ is the flow around a
@@ -63,19 +63,19 @@ Conventions used in the code (and why):
 ### 2.1 The velocity of one panel
 
 Put a panel of length $L$ on the local $x$-axis from $0$ to $L$, with constant source density
-$\sigma$. A field point $(x, y)$ sees each small piece $\sigma\,d\xi$ as a point source, so
+$\sigma$. A field point $(x, y)$ sees each small piece $\sigma\ d\xi$ as a point source, so
 
-$$
+```math
 u = \frac{\sigma}{2\pi}\int_0^L \frac{x - \xi}{(x - \xi)^2 + y^2}\,d\xi,
 \qquad
 v = \frac{\sigma}{2\pi}\int_0^L \frac{y}{(x - \xi)^2 + y^2}\,d\xi .
-$$
+```
 
 Both integrals are elementary:
 
-$$
+```math
 \boxed{\;u = \frac{\sigma}{2\pi}\ln\frac{r_1}{r_2},\qquad v = \frac{\sigma}{2\pi}\,\beta\;}
-$$
+```
 
 where $r_1, r_2$ are the distances to the panel's end points and $\beta = \theta_2 - \theta_1$ is
 the **angle the panel subtends** at the field point. A constant **vortex** panel gives the same
@@ -83,7 +83,7 @@ field rotated by 90°: $u = -\frac{\gamma}{2\pi}\beta$, $v = \frac{\gamma}{2\pi}
 
 Two limits you must get right:
 
-- **Far away**, $\beta \to L\,y/r^2$ and the panel looks like a point source of strength $\sigma L$.
+- **Far away**, $\beta \to L\ y/r^2$ and the panel looks like a point source of strength $\sigma L$.
 - **On the panel itself**, approached from the fluid side, $\beta \to \pi$. The source panel then
   pushes fluid straight out with velocity $\sigma/2$, and the vortex panel slides it along at
   $-\gamma/2$. These **self-induced jumps** are half the story of the method.
@@ -105,10 +105,10 @@ That is $N + 1$ unknowns. The equations:
 
 **(i) Flow tangency at every control point** — no flow through the surface:
 
-$$
+```math
 \sum_{j=1}^{N} A^{n}_{ij}\,\sigma_j \;+\; \gamma\sum_{j=1}^{N} B^{n}_{ij} \;+\; \mathbf V_\infty\cdot\hat{\mathbf n}_i \;=\; 0,
 \qquad i = 1\ldots N,
-$$
+```
 
 where $A^n_{ij}$ is the normal velocity at control point $i$ due to a unit source on panel $j$,
 and $B^n_{ij}$ the same for a unit vortex.
@@ -117,13 +117,13 @@ and $B^n_{ij}$ the same for a unit vortex.
 speeds on the first and last panels (which meet at the trailing edge) are equal. Their tangents
 point in opposite directions, so
 
-$$
+```math
 V_{t,1} + V_{t,N} = 0 .
-$$
+```
 
 In matrix form this is a dense $(N+1)\times(N+1)$ system:
 
-$$
+```math
 \begin{bmatrix}
 A^n & B^n\mathbf 1\\
 (A^t_{1\cdot} + A^t_{N\cdot}) & \sum_j (B^t_{1j} + B^t_{Nj})
@@ -131,7 +131,7 @@ A^n & B^n\mathbf 1\\
 \begin{bmatrix}\boldsymbol\sigma\\ \gamma\end{bmatrix}
 =
 \begin{bmatrix}-\mathbf V_\infty\cdot\hat{\mathbf n}\\ -\mathbf V_\infty\cdot(\hat{\mathbf t}_1 + \hat{\mathbf t}_N)\end{bmatrix}
-$$
+```
 
 `numpy.linalg.solve` does the rest. For 200 panels the whole solve, including building the matrices, takes about 10 ms.
 
@@ -139,16 +139,16 @@ $$
 
 With $\sigma_j$ and $\gamma$ known, the tangential velocity at each control point is
 
-$$
+```math
 V_{t,i} = \sum_j A^t_{ij}\sigma_j + \gamma\sum_j B^t_{ij} + \mathbf V_\infty\cdot\hat{\mathbf t}_i ,
 \qquad
 C_{p,i} = 1 - \left(\frac{V_{t,i}}{V_\infty}\right)^2 .
-$$
+```
 
 Lift can be obtained **two independent ways**, and comparing them is a built-in check:
 
 1. **Kutta–Joukowski:** $\Gamma = -\gamma\sum_j L_j$ (clockwise positive), $c_l = 2\Gamma/(V_\infty c)$.
-2. **Pressure integration:** $\mathbf F = -\sum_j C_{p,j}\,\hat{\mathbf n}_j L_j$, rotated into lift and drag.
+2. **Pressure integration:** $\mathbf F = -\sum_j C_{p,j}\ \hat{\mathbf n}_j L_j$, rotated into lift and drag.
 
 In exact potential flow the drag is zero (**d'Alembert's paradox**), so the pressure-integrated
 drag measures discretisation error.
@@ -212,7 +212,7 @@ Things to notice in the $C_p$ plot:
 
 **Thickness changes the lift slope.** Thin theory says $2\pi$. The panel method gives
 0.1209 per degree for NACA 0012, about 10 % more, close to the classical estimate
-$2\pi(1 + 0.77\,t/c) = 0.1198$ per degree. **But the wind tunnel says 0.108.** The boundary layer
+$2\pi(1 + 0.77\ t/c) = 0.1198$ per degree. **But the wind tunnel says 0.108.** The boundary layer
 (Lesson 3) de-cambers the section and more than cancels the thickness effect. An inviscid method
 *always* over-predicts lift slope and $|c_m|$; knowing the sign and size of that error is part of
 using the tool well.

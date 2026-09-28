@@ -12,16 +12,16 @@ building blocks (counter-clockwise vortices positive):
 
 | Element | Velocity at distance $r$ |
 |---|---|
-| Source $\sigma$ | $\mathbf{V} = \frac{\sigma}{2\pi r}\,\hat{\mathbf{e}}_r$ |
-| Vortex $\Gamma$ | $\mathbf{V} = \frac{\Gamma}{2\pi r}\,\hat{\mathbf{e}}_\theta$ |
+| Source $\sigma$ | $\mathbf{V} = \frac{\sigma}{2\pi r}\ \hat{\mathbf{e}}_r$ |
+| Vortex $\Gamma$ | $\mathbf{V} = \frac{\Gamma}{2\pi r}\ \hat{\mathbf{e}}_\theta$ |
 | Doublet $\mu$ (axis $\hat{\mathbf d}$) | $\phi = \frac{\mu}{2\pi}\frac{\hat{\mathbf d}\cdot\mathbf r}{r^2}$ |
 
 A straight panel of length $L$ with a constant source (or vortex) density induces, in panel
 coordinates, velocities built from two geometric integrals:
 
-$$
+```math
 \ln\frac{r_1}{r_2}, \qquad \beta = \theta_2 - \theta_1 ,
-$$
+```
 
 the log of the distance ratio to the end points and the angle subtended by the panel. For a
 source panel $u = \frac{\sigma}{2\pi}\ln\frac{r_1}{r_2}$, $v = \frac{\sigma}{2\pi}\beta$; a vortex
@@ -63,7 +63,7 @@ anywhere in the field (used for streamlines).
 | Joukowski airfoil, exact $c_l$ and $C_p$ | observed order 0.66 → 0.78; −0.9 % $c_l$ at N = 800 |
 | Pressure-integrated vs Kutta–Joukowski $c_l$ | agree within 0.5 % |
 | d'Alembert: pressure drag | $|c_d| < 2\times10^{-3}$ (discretisation error) |
-| Thickness effect on lift slope | $2\pi(1 + 0.77\,t/c)$ within 2 % |
+| Thickness effect on lift slope | $2\pi(1 + 0.77\ t/c)$ within 2 % |
 | Thin section (NACA 2402) | $\alpha_{L0}$, $c_{m,c/4}$ match thin airfoil theory |
 | NACA 0012 / 2412 vs measurements | see [validation report](validation-report.md) |
 

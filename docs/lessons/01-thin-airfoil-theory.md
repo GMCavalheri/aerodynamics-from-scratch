@@ -29,9 +29,9 @@ A velocity jump across a thin surface is exactly what a **vortex sheet** produce
 has strength $\gamma(x)$ (circulation per unit length), the tangential velocity just above and
 just below it differ by
 
-$$
+```math
 u_{upper} - u_{lower} = \gamma(x).
-$$
+```
 
 So the idea is simple: *replace the airfoil by a vortex sheet and choose $\gamma(x)$ so that the
 flow behaves like flow around the airfoil*. Two assumptions make the problem tractable:
@@ -44,12 +44,12 @@ flow behaves like flow around the airfoil*. Two assumptions make the problem tra
 
 The camber line must be a **streamline**: the flow cannot cross it. The freestream contributes a
 normal velocity $V_\infty(\alpha - dz/dx)$ to the camber line (small-angle version). The vortex
-sheet must cancel it. A small piece $\gamma(\xi)\,d\xi$ at $\xi$ induces at $x$ a vertical
-velocity $\gamma(\xi)\,d\xi / [2\pi(x - \xi)]$, like a point vortex. Adding all pieces:
+sheet must cancel it. A small piece $\gamma(\xi)\ d\xi$ at $\xi$ induces at $x$ a vertical
+velocity $\gamma(\xi)\ d\xi / [2\pi(x - \xi)]$, like a point vortex. Adding all pieces:
 
-$$
+```math
 \boxed{\;\frac{1}{2\pi}\int_0^c \frac{\gamma(\xi)\,d\xi}{x - \xi} = V_\infty\left(\alpha - \frac{dz}{dx}\right)\;}
-$$
+```
 
 This is an **integral equation**: the unknown $\gamma$ sits inside an integral. The integral is
 singular at $\xi = x$ and is taken as a Cauchy principal value.
@@ -58,9 +58,9 @@ One equation is not enough. For any $\gamma$ that solves it, adding a pure circu
 induces no normal velocity on the chord still solves it. We need one more physical condition,
 the **Kutta condition**:
 
-$$
+```math
 \gamma(c) = 0 ,
-$$
+```
 
 meaning the flow leaves the sharp trailing edge smoothly with equal speeds on both sides. The
 Kutta condition is how viscosity, which is absent from the model, fixes the circulation and
@@ -71,9 +71,9 @@ therefore the lift.
 The singular kernel and the square-root behaviour near the edges become easy after the
 substitution
 
-$$
+```math
 x = \frac{c}{2}(1 - \cos\theta), \qquad 0 \le \theta \le \pi .
-$$
+```
 
 ![Glauert substitution](../figures/lessons/l1_glauert_transform.png)
 
@@ -83,13 +83,13 @@ the vortex lattice method (Lesson 4) both use it.
 
 The key integral that makes everything work is **Glauert's integral**:
 
-$$
+```math
 \int_0^\pi \frac{\cos n\theta_0}{\cos\theta_0 - \cos\theta}\,d\theta_0 = \pi\,\frac{\sin n\theta}{\sin\theta}.
-$$
+```
 
 ### 3.1 The flat plate first
 
-For a flat plate ($dz/dx = 0$) try $\gamma(\theta) = 2\alpha V_\infty\,\frac{1+\cos\theta}{\sin\theta}$.
+For a flat plate ($dz/dx = 0$) try $\gamma(\theta) = 2\alpha V_\infty\ \frac{1+\cos\theta}{\sin\theta}$.
 With the $n = 0$ and $n = 1$ cases of Glauert's integral, the left side of the fundamental
 equation becomes exactly $V_\infty\alpha$. At $\theta = \pi$ (trailing edge), $1 + \cos\theta = 0$,
 so the Kutta condition holds. At $\theta = 0$ (leading edge) $\gamma \to \infty$: the famous
@@ -99,24 +99,24 @@ so the Kutta condition holds. At $\theta = 0$ (leading edge) $\gamma \to \infty$
 
 For a cambered airfoil, add a Fourier sine series that vanishes at both edges:
 
-$$
+```math
 \gamma(\theta) = 2V_\infty\left[A_0\,\frac{1 + \cos\theta}{\sin\theta} + \sum_{n=1}^{\infty} A_n\sin n\theta\right].
-$$
+```
 
 Substituting and using Glauert's integral term by term turns the fundamental equation into
 
-$$
+```math
 \frac{dz}{dx} = (\alpha - A_0) + \sum_{n=1}^\infty A_n\cos n\theta .
-$$
+```
 
 That is a **Fourier cosine series of the camber slope**, so the coefficients follow from
 orthogonality:
 
-$$
+```math
 A_0 = \alpha - \frac{1}{\pi}\int_0^\pi \frac{dz}{dx}\,d\theta_0,
 \qquad
 A_n = \frac{2}{\pi}\int_0^\pi \frac{dz}{dx}\cos n\theta_0\,d\theta_0 .
-$$
+```
 
 Notice that **only $A_0$ depends on $\alpha$**. Every $A_{n\ge1}$ depends only on the shape of
 the camber line.
@@ -124,20 +124,20 @@ the camber line.
 ## 4. From circulation to forces
 
 The Kutta–Joukowski theorem gives lift per unit span as $L' = \rho_\infty V_\infty\Gamma$ with
-$\Gamma = \int_0^c \gamma\,dx$. Integrating the series (only the $A_0$ and $A_1$ terms survive):
+$\Gamma = \int_0^c \gamma\ dx$. Integrating the series (only the $A_0$ and $A_1$ terms survive):
 
-$$
+```math
 \Gamma = c\,V_\infty\,\pi\left(A_0 + \tfrac{1}{2}A_1\right)
 \quad\Longrightarrow\quad
 c_l = \frac{L'}{\tfrac12\rho V_\infty^2 c} = \pi\,(2A_0 + A_1).
-$$
+```
 
 Writing $A_0$ out:
 
-$$
+```math
 \boxed{\;c_l = 2\pi\,(\alpha - \alpha_{L0}),\qquad
 \alpha_{L0} = -\frac{1}{\pi}\int_0^\pi \frac{dz}{dx}\,(\cos\theta_0 - 1)\,d\theta_0\;}
-$$
+```
 
 Two classic results fall out:
 
@@ -147,11 +147,11 @@ Two classic results fall out:
 
 The moment about the leading edge (nose-up positive) comes from weighting the loading by $x$:
 
-$$
+```math
 c_{m,LE} = -\left[\frac{c_l}{4} + \frac{\pi}{4}(A_1 - A_2)\right],
 \qquad
 c_{m,c/4} = c_{m,LE} + \frac{c_l}{4} = \frac{\pi}{4}(A_2 - A_1).
-$$
+```
 
 $c_{m,c/4}$ contains no $\alpha$. **The quarter-chord point is the aerodynamic centre**: the
 moment there does not change with incidence. That is why wings are located and structurally
@@ -159,9 +159,9 @@ referenced at their quarter chord.
 
 The **centre of pressure**, where the resultant force acts, *does* move:
 
-$$
+```math
 \frac{x_{cp}}{c} = \frac14\left[1 + \frac{\pi}{c_l}(A_1 - A_2)\right],
-$$
+```
 
 and it runs off to infinity as $c_l \to 0$ on a cambered section. This is why engineers prefer
 the aerodynamic centre.
@@ -169,7 +169,7 @@ the aerodynamic centre.
 ### The loading, split in two
 
 The pressure difference is $\Delta C_p = 2\gamma/V_\infty$. At the **ideal angle of attack**
-$\alpha_{ideal} = \frac1\pi\int_0^\pi \frac{dz}{dx}\,d\theta_0$ we get $A_0 = 0$ and the
+$\alpha_{ideal} = \frac1\pi\int_0^\pi \frac{dz}{dx}\ d\theta_0$ we get $A_0 = 0$ and the
 leading-edge singularity disappears: the flow meets the leading edge smoothly. Any other angle
 adds a flat-plate-shaped load on top:
 
@@ -183,13 +183,13 @@ smooth hump that exists at every incidence.
 The NACA 4-digit camber line, with max camber $m$ at chordwise station $p$ (here $m = 0.02$,
 $p = 0.4$):
 
-$$
+```math
 \frac{dz}{dx} =
 \begin{cases}
 \dfrac{2m}{p^2}(p - x), & x \lt p\\[2mm]
 \dfrac{2m}{(1-p)^2}(p - x), & x \ge p
 \end{cases}
-$$
+```
 
 The integrals can be done by hand (Anderson, Example 4.6) or numerically:
 
@@ -214,7 +214,7 @@ Checking by hand:
 | $\alpha_{L0}$ | −2.077° |
 | $c_l$ at 4° | $2\pi \times (4 + 2.077)° \times \frac{\pi}{180} = 0.666$ |
 | $c_{m,c/4}$ | $\frac{\pi}{4}(0.0139 - 0.0815) = -0.0531$ |
-| $x_{cp}$ at 4° | $\frac14\left[1 + \frac{\pi}{0.666}(0.0676)\right] = 0.330\,c$ |
+| $x_{cp}$ at 4° | $\frac14\left[1 + \frac{\pi}{0.666}(0.0676)\right] = 0.330\ c$ |
 | $\alpha_{ideal}$ | 0.26° |
 
 **Against the wind tunnel** (Abbott & von Doenhoff): measured $\alpha_{L0} \approx -2.1°$, very
@@ -235,8 +235,8 @@ key choices:
   $x = p$, so `quad` receives $\theta_p = \arccos(1 - 2p)$ as a breakpoint. Without it adaptive
   quadrature wastes effort and can lose digits.
 - **Keep $A_0$'s $\alpha$ out of the cache.** The code stores
-  $B_0 = \frac1\pi\int dz/dx\,d\theta$ once and returns $A_0 = \alpha - B_0$ on demand.
-- **Test with an exact case.** For the parabolic arc $z = 4h\,x(1-x)$, $dz/dx = 4h\cos\theta$:
+  $B_0 = \frac1\pi\int dz/dx\ d\theta$ once and returns $A_0 = \alpha - B_0$ on demand.
+- **Test with an exact case.** For the parabolic arc $z = 4h\ x(1-x)$, $dz/dx = 4h\cos\theta$:
   only $A_1 = 4h$ survives, so $\alpha_{L0} = -2h$ and $c_{m,c/4} = -\pi h$ exactly. The test
   suite checks this to round-off.
 
@@ -264,8 +264,8 @@ key choices:
 <details>
 <summary>Answers</summary>
 
-1. With $A_{n\ge1} = 0$, $c_{m,LE} = -c_l/4$. Then $x_{cp} = -c_{m,LE}\,c/c_l = c/4$.
-2. $\alpha_{ideal} = \frac1\pi\int_0^\pi 4h\cos\theta\,d\theta = 0$. At $\alpha = 0$ the loading is
+1. With $A_{n\ge1} = 0$, $c_{m,LE} = -c_l/4$. Then $x_{cp} = -c_{m,LE}\ c/c_l = c/4$.
+2. $\alpha_{ideal} = \frac1\pi\int_0^\pi 4h\cos\theta\ d\theta = 0$. At $\alpha = 0$ the loading is
    $\Delta C_p = 8h\sin\theta$, a smooth hump with no leading-edge peak.
 3. $dz/dx$ is proportional to $m$, and every result is a linear integral of $dz/dx$.
 4. Moving camber aft increases $A_1 - A_2$; the most nose-down moment is at the aft end of the

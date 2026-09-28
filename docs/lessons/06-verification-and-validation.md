@@ -73,23 +73,23 @@ Each level assumes the one below it works. Some concrete examples:
 
 For a consistent discretisation the error behaves like
 
-$$
+```math
 \varepsilon(N) \approx C\,N^{-p},
-$$
+```
 
 where $p$ is the **order of accuracy**. Doubling $N$ divides the error by $2^p$. From three
 solutions on grids $N$, $2N$, $4N$ you can measure the **observed order** without knowing the exact
 answer:
 
-$$
+```math
 p_{obs} = \log_2\frac{f_{2N} - f_N}{f_{4N} - f_{2N}} .
-$$
+```
 
 And once you know $p$, **Richardson extrapolation** estimates the converged value:
 
-$$
+```math
 f_\infty \approx f_{2N} + \frac{f_{2N} - f_N}{2^p - 1}.
-$$
+```
 
 ![Convergence orders](../figures/lessons/l6_convergence_orders.png)
 
@@ -105,9 +105,9 @@ What the measurements show:
 **Worked Richardson example.** NACA 0012 at 5°: $c_l = 0.604818$ ($N = 200$) and $0.603944$
 ($N = 400$). With $p = 1$:
 
-$$
+```math
 c_{l,\infty} \approx 0.603944 + \frac{0.603944 - 0.604818}{2 - 1} = 0.603070 ,
-$$
+```
 
 matching the $N = 800$ trend ($0.603488$ and still falling by about half the previous step).
 

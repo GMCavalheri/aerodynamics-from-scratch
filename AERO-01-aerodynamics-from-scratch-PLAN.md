@@ -47,7 +47,7 @@ aerodynamics-from-scratch/
 ```
 
 ## Execution Plan
-- [ ] **Phase 1 — Thin airfoil theory**: implement and validate against NACA 4-digit analytical results.
+- [x] **Phase 1 — Thin airfoil theory**: implement and validate against NACA 4-digit analytical results.
 - [ ] **Phase 2 — 2D panel method**: implement source/vortex panel method, validate Cl and Cp distribution against published NACA airfoil data (e.g., NACA 0012, NACA 2412).
 - [ ] **Phase 3 — Boundary layer / viscous drag**: implement Thwaites' method, estimate Cd, compare against XFOIL reference values.
 - [ ] **Phase 4 — 3D Vortex Lattice Method**: implement horseshoe vortex discretization, solve for circulation, validate against Prandtl's lifting-line results for elliptical wings.

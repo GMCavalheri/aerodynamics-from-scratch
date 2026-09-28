@@ -35,4 +35,7 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "NPY", "SIM"]
-ignore = ["E741"]  # single-letter math names (l, I) are idiomatic here
+ignore = [
+    "E741",    # single-letter math names (l, I) are idiomatic here
+    "SIM300",  # false positives on uppercase math attributes (ta.A1 == ...)
+]

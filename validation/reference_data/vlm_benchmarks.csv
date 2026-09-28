@@ -1,0 +1,10 @@
+# Lifting-surface benchmarks for the vortex lattice method (lift-curve slope per radian).
+# [Kinner] Kinner, W., "Die kreisförmige Tragfläche auf potentialtheoretischer Grundlage",
+#          Ing.-Arch. 8, 1937: exact linear lifting-surface solution for a flat circular wing,
+#          CL_alpha = 1.790 /rad (also Jordan, J. Aircraft 1973).
+# [Bertin] Bertin, J. J. & Smith, M. L., Aerodynamics for Engineers, Example 7.2: VLM with four
+#          horseshoe vortices per semispan, CL_alpha = 0.0601 /deg, which the text compares to
+#          a measured ~0.060 /deg.
+case,aspect_ratio,taper,sweep_c4_deg,cl_alpha_per_rad,tolerance_rel,source
+circular wing,1.2732,elliptic,0,1.790,0.01,[Kinner]
+swept tapered wing,5,0.5,45,3.4435,0.02,[Bertin]

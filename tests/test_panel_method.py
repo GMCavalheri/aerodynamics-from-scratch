@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 
+from aero.geometry import Joukowski
 from aero.panel_method_2d import solve_airfoil, solve_panels
 from aero.thin_airfoil import ThinAirfoil
 
@@ -83,3 +84,28 @@ def test_thin_section_approaches_thin_airfoil_theory():
     alpha_l0 = -s0.cl / ((s1.cl - s0.cl) / (4 * DEG))
     assert alpha_l0 / DEG == pytest.approx(ta.alpha_zero_lift / DEG, abs=0.1)
     assert s1.cm == pytest.approx(ta.cm_quarter_chord, abs=0.005)
+
+
+def test_joukowski_exact_solution():
+    # Exact conformal-map solution (Anderson Sec. 4.14). The cusped trailing edge limits
+    # Hess-Smith to first-order convergence, so check the error halves as N doubles.
+    jk = Joukowski(0.1, 0.1)
+    alpha = 5 * DEG
+    errs, cp_errs = [], []
+    for n in (200, 400, 800):
+        sol = solve_panels(jk.coordinates(n), alpha)
+        errs.append(abs(sol.cl - jk.cl(alpha)) / jk.cl(alpha))
+        away_from_cusp = sol.control_points[:, 0] < 0.9
+        cp_err = np.abs(sol.cp - jk.surface_cp(sol.control_points, alpha))[away_from_cusp]
+        cp_errs.append(np.median(cp_err))
+    assert errs[-1] < 0.01
+    assert cp_errs[-1] < 0.01
+    assert errs[0] / errs[1] > 1.5 and errs[1] / errs[2] > 1.5
+    assert cp_errs[0] / cp_errs[1] > 1.5 and cp_errs[1] / cp_errs[2] > 1.5
+
+
+def test_joukowski_symmetric_section():
+    # Symmetric section: no lift at alpha = 0, and thickness lifts cl above the flat plate.
+    jk = Joukowski(0.08, 0.0)
+    assert jk.cl(0.0) == pytest.approx(0.0)
+    assert jk.cl(4 * DEG) > 2 * np.pi * np.sin(4 * DEG)

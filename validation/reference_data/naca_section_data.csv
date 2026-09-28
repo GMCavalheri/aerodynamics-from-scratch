@@ -1,0 +1,16 @@
+# Summary section characteristics used to sanity-check the inviscid solvers.
+# Values are published summary numbers (not digitised curves). low/high give the band used in
+# the checks and reflect reading/Reynolds-number spread, not a measurement uncertainty.
+# Please verify against the original sources before reusing them elsewhere.
+#
+# [AvD] Abbott, I. H. & von Doenhoff, A. E., Theory of Wing Sections, Dover, 1959, Appendix IV
+#       (NACA Report 824 data), smooth model, Re ~ 6e6.
+# [And] Anderson, J. D., Fundamentals of Aerodynamics, McGraw-Hill, Examples 4.6 and 4.7, which
+#       quote the [AvD] measurements for NACA 2412 next to thin airfoil theory.
+airfoil,quantity,value,low,high,reynolds,source
+NACA 0012,alpha_L0_deg,0.0,-0.1,0.1,6e6,[AvD] (symmetric section)
+NACA 0012,cm_c4,0.0,-0.01,0.01,6e6,[AvD] (symmetric section)
+NACA 0012,cl_alpha_per_deg,0.108,0.103,0.112,6e6,[AvD] lift-curve slope
+NACA 2412,alpha_L0_deg,-2.1,-2.3,-1.9,6e6,[And] Example 4.6 quoting [AvD]
+NACA 2412,cm_c4,-0.045,-0.05,-0.04,6e6,[And] Example 4.7 quoting [AvD]
+NACA 2412,cl_alpha_per_deg,0.105,0.100,0.110,6e6,[AvD] lift-curve slope

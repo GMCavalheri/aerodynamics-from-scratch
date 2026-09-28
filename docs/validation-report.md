@@ -15,7 +15,7 @@ used in the checks reflect reading and Reynolds-number spread.
 | Solver | Benchmark | Computed | Reference | Status |
 |---|---|---|---|---|
 | Thin airfoil | NACA 2412 $\alpha_{L0}$ / $c_{m,c/4}$ | −2.077° / −0.0531 | −2.077° / −0.053 (Anderson) | exact |
-| Panel method | Circular cylinder $C_p$ | max error < 2e-3 | $1 - 4\sin^2\theta$ | ✔ |
+| Panel method | Circular cylinder $C_p$ | exact to round-off | $1 - 4\sin^2\theta$ | ✔ |
 | Panel method | Joukowski airfoil $c_l$ (N = 800) | 1.2069 | 1.2181 (exact) | −0.9 % |
 | Panel method | NACA 2412 $\alpha_{L0}$ | −2.15° | −2.1° (measured) | ✔ |
 | Boundary layer | Blasius $\theta\sqrt{Re_x}/x$ | 0.671 | 0.664 | +1.0 % |
@@ -36,9 +36,11 @@ $\alpha_{L0}$ well (−2.08° vs −2.1°) and over-predicts the nose-down momen
 ## 2. Panel method
 
 **Exact solutions.** The non-lifting circular cylinder matches $C_p = 1 - 4\sin^2\theta$ to
-2e-3 with 128 panels. The Joukowski airfoil has an exact conformal-map solution; the panel
-method converges to it at first order, the cusped trailing edge being the hardest case for
-constant-strength panels:
+round-off at the control points for any panel count. On a regular polygon the discrete solution
+is exact there, so this test catches sign and assembly errors but not discretisation error. The
+Joukowski airfoil has an exact conformal-map solution. The panel method converges to it with an
+observed order of 0.66 → 0.78, below first order, because the cusped trailing edge is the
+hardest case for constant-strength panels:
 
 | N | $c_l$ panel | $c_l$ exact | error |
 |---|---|---|---|
@@ -135,7 +137,7 @@ mid-points, $e$ converges in ~24 panels; uniform spacing over-predicts $e$ by 2 
 |---|---|---|
 | Inviscid $c_{l\alpha}$ 12–15 % above experiment | no boundary-layer displacement | viscous–inviscid coupling |
 | NACA 0012 $c_d$ ~15 % high | early Michel transition, uncoupled BL | $e^N$ transition, coupled solver |
-| Joukowski first-order convergence | cusped TE with constant-strength panels | linear-vorticity panels |
+| Joukowski convergence below first order (0.66 → 0.78) | cusped TE with constant-strength panels | linear-vorticity panels |
 | Rectangular-wing $e$: VLM 0.972 vs LL 0.937 (AR 8) | lifting-line strip assumption at a square tip | — (model difference) |
 
 ## References

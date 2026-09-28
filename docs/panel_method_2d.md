@@ -59,8 +59,8 @@ anywhere in the field (used for streamlines).
 
 | Check | Result |
 |---|---|
-| Circular cylinder (non-lifting), $C_p = 1 - 4\sin^2\theta$ | max error < 2e-3 at N = 128 |
-| Joukowski airfoil, exact $c_l$ and $C_p$ | first-order convergence; −0.9 % $c_l$ at N = 800 |
+| Circular cylinder (non-lifting), $C_p = 1 - 4\sin^2\theta$ | exact to round-off at the control points, any N |
+| Joukowski airfoil, exact $c_l$ and $C_p$ | observed order 0.66 → 0.78; −0.9 % $c_l$ at N = 800 |
 | Pressure-integrated vs Kutta–Joukowski $c_l$ | agree within 0.5 % |
 | d'Alembert: pressure drag | $|c_d| < 2\times10^{-3}$ (discretisation error) |
 | Thickness effect on lift slope | $2\pi(1 + 0.77\,t/c)$ within 2 % |
@@ -69,10 +69,13 @@ anywhere in the field (used for streamlines).
 
 The cusped Joukowski trailing edge is the worst case for constant-strength panels (the Kutta
 condition is applied between two nearly parallel panels), which is why convergence there is
-only first order.
+below first order (observed order 0.66 → 0.78 between N = 100 and 800). On a smooth NACA 0012
+the observed order approaches 1. On a regular polygon the cylinder solution is exact at the
+control points, so the cylinder checks assembly and signs but cannot measure discretisation
+error.
 
 ## Limits
 
 Inviscid, so lift slope and $|c_m|$ are over-predicted compared with experiment (no
-boundary-layer de-cambering) and there is no stall. Constant-strength panels give a
-first-order method; linear-vorticity panels would converge faster.
+boundary-layer de-cambering) and there is no stall. Constant-strength panels give at
+most a first-order method; linear-vorticity panels would converge faster.

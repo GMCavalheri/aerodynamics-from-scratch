@@ -15,11 +15,12 @@ def cylinder_nodes(n, radius=1.0):
 
 
 def test_cylinder_pressure_distribution():
-    # Exact potential flow: Cp = 1 - 4 sin^2(theta) (Anderson Sec. 3.13).
+    # Exact potential flow: Cp = 1 - 4 sin^2(theta) (Anderson Sec. 3.13). On a regular polygon
+    # constant source panels reproduce it exactly at the midpoints, so demand round-off accuracy.
     sol = solve_panels(cylinder_nodes(128), 0.0, lifting=False)
     xc, yc = sol.control_points.T
     th = np.arctan2(yc, xc)
-    assert np.allclose(sol.cp, 1 - 4 * np.sin(th) ** 2, atol=2e-3)
+    assert np.allclose(sol.cp, 1 - 4 * np.sin(th) ** 2, atol=1e-12)
     assert np.sum(sol.sigma * sol.lengths) == pytest.approx(0.0, abs=1e-10)
 
 
@@ -87,8 +88,9 @@ def test_thin_section_approaches_thin_airfoil_theory():
 
 
 def test_joukowski_exact_solution():
-    # Exact conformal-map solution (Anderson Sec. 4.14). The cusped trailing edge limits
-    # Hess-Smith to first-order convergence, so check the error halves as N doubles.
+    # Exact conformal-map solution (Anderson Sec. 4.14). The cusped trailing edge holds
+    # Hess-Smith below first order (observed ~0.7-0.8), so require the error to drop by more
+    # than 1.5x per doubling (order > 0.58).
     jk = Joukowski(0.1, 0.1)
     alpha = 5 * DEG
     errs, cp_errs = [], []

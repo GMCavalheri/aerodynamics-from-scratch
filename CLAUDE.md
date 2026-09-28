@@ -8,6 +8,7 @@ Plan: `AERO-01-aerodynamics-from-scratch-PLAN.md` (tick the phase checkboxes as 
 - `uv run pytest` — tests
 - `uv run ruff check . && uv run ruff format --check .` — lint/format (CI runs both)
 - `uv run python validation/<script>.py` — regenerate validation figures into `docs/figures/`
+- `uv run python docs/lessons/make_figures.py` — regenerate the lesson figures
 - `uv run python notebooks/build_notebooks.py` — regenerate and execute the notebooks (edit cell
   sources there, never the .ipynb JSON)
 
@@ -15,7 +16,8 @@ Plan: `AERO-01-aerodynamics-from-scratch-PLAN.md` (tick the phase checkboxes as 
 - `src/aero/` — single package; subpackages mirror the plan: `geometry`, `thin_airfoil`,
   `panel_method_2d`, `boundary_layer`, `vortex_lattice_3d`; `singularities.py` shared.
 - `tests/` — pytest, one file per module. `validation/` — scripts + cited reference data.
-- `docs/` — theory notes per module, validation report, figures. `notebooks/` — executed demos.
+- `docs/` — theory notes per module, validation report, figures; `docs/lessons/` is a six-lesson
+  course (keep its numbers in sync with the code). `notebooks/` — executed demos.
 
 ## Conventions
 - Everything nondimensional: chord = 1, freestream speed = 1 unless an argument says otherwise.

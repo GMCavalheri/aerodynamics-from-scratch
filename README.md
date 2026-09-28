@@ -55,14 +55,14 @@ from aero.vortex_lattice_3d import Wing, solve_vlm
 
 alpha = np.radians(4)
 
-sol = solve_airfoil("NACA 2412", alpha, n_panels=200)        # inviscid section
-print(f"cl = {sol.cl:.3f}, cm_c/4 = {sol.cm:.3f}")            # cl = 0.743, cm_c/4 = -0.060
+sol = solve_airfoil("NACA 2412", alpha, n_panels=200)  # inviscid section
+print(f"cl = {sol.cl:.3f}, cm_c/4 = {sol.cm:.3f}")  # cl = 0.743, cm_c/4 = -0.060
 
-bl = viscous_drag(sol, re=3e6)                                 # boundary layer + drag
+bl = viscous_drag(sol, re=3e6)  # boundary layer + drag
 print(f"cd = {bl.cd:.5f}, transition x/c = {bl.upper.x_transition:.2f}")
 
 wing = Wing.tapered(aspect_ratio=8, taper=0.4, sweep=np.radians(25))
-s = solve_vlm(wing, alpha)                                     # finite wing
+s = solve_vlm(wing, alpha)  # finite wing
 print(f"CL = {s.CL:.3f}, CDi = {s.CDi:.5f}, e = {s.span_efficiency:.3f}")
 ```
 
